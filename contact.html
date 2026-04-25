@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>צור קשר — בית אברהם</title>
+  <meta name="description" content="פנייה לבית אברהם — כאיש מקצוע, כפותח דלתות, או כשותף לדרך." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">בית אברהם</a>
+      <button class="hamburger" aria-label="פתח תפריט" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="topnav">
+        <a href="model.html">הרעיון</a>
+        <a href="about.html">מי אנחנו</a>
+        <a href="faq.html">שאלות</a>
+        <a href="sources.html">מקורות</a>
+        <a href="contact.html" class="active">צור קשר</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <p class="eyebrow">צור קשר</p>
+      <h1>בואו נדבר</h1>
+      <p class="lede">
+        שלוש דרכים להתחבר לבית אברהם, וכל אחת מתחילה משאלה אחרת. בחר/י את המסלול שמתאר אותך — או, אם אינך בטוח/ה, שלח/י אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a> ונמצא יחד.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ TABS ============ -->
+  <section class="contact-section">
+    <div class="container container-narrow">
+      <div class="tabs" role="tablist">
+        <button class="tab-button active" data-tab="professional" role="tab" aria-selected="true">איש מקצוע</button>
+        <button class="tab-button" data-tab="connection" role="tab" aria-selected="false">חיבור והיכרות</button>
+        <button class="tab-button" data-tab="partnership" role="tab" aria-selected="false">שותפות מימון</button>
+      </div>
+
+      <!-- ============ PROFESSIONAL FORM ============ -->
+      <div class="tab-content active" data-tab-content="professional" role="tabpanel">
+        <div class="tab-intro">
+          <h2 class="tab-title">איש מקצוע</h2>
+          <p>
+            מנהלי מוסדות, עובדות סוציאליות, אדריכלים, רואי חשבון, עורכי דין, יועצי רגולציה, רופאים גריאטריים, רבנים. אנחנו בונים ועדת יועצים — אם אחד מהתחומים האלה הוא שלך, נשמח לשיחת היכרות, גם בלי התחייבות מצידך.
+          </p>
+        </div>
+
+        <form id="professional-form" class="form-card" novalidate>
+          <div class="form-row form-row-2col">
+            <div>
+              <label for="prof-name" class="form-label">שם מלא <span class="required">*</span></label>
+              <input type="text" id="prof-name" name="name" required />
+            </div>
+            <div>
+              <label for="prof-email" class="form-label">אימייל <span class="required">*</span></label>
+              <input type="email" id="prof-email" name="email" required />
+            </div>
+          </div>
+
+          <div class="form-row form-row-2col">
+            <div>
+              <label for="prof-phone" class="form-label">טלפון</label>
+              <input type="tel" id="prof-phone" name="phone" />
+            </div>
+            <div>
+              <label for="prof-years" class="form-label">שנות ניסיון</label>
+              <input type="number" id="prof-years" name="years_experience" min="0" max="60" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="prof-expertise" class="form-label">תחום מקצועי</label>
+            <select id="prof-expertise" name="expertise">
+              <option value="">בחר תחום</option>
+              <option value="moadot">ניהול פנימייה / כפר נוער / בית אבות</option>
+              <option value="social_work">עבודה סוציאלית</option>
+              <option value="architecture">אדריכלות</option>
+              <option value="regulation">רגולציה (משרד הרווחה / חינוך / בריאות)</option>
+              <option value="legal_finance">ייעוץ משפטי / רואי חשבון</option>
+              <option value="rabbi">רבנות חרדית</option>
+              <option value="philanthropy">פילנתרופיה / קישור לתורמים</option>
+              <option value="medical">רפואה גריאטרית</option>
+              <option value="other">אחר</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="prof-interest" class="form-label">רמת ההתעניינות</label>
+            <select id="prof-interest" name="advisory_interest">
+              <option value="">בחר</option>
+              <option value="just_meeting">רק שיחת היכרות בשלב הזה</option>
+              <option value="maybe_advisory">אולי ועדת יועצים, רוצה לשמוע יותר</option>
+              <option value="yes_advisory">מעוניין/ת להצטרף לועדת היועצים</option>
+              <option value="employment">מעוניין/ת בתפקיד פעיל בכפר</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="prof-message" class="form-label">מסר חופשי</label>
+            <textarea id="prof-message" name="message" rows="5" placeholder="ספר/י קצת על הניסיון שלך ועל מה שמדבר אליך בפרויקט"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="prof-submit">שליחת פנייה</button>
+          </div>
+
+          <div class="form-message" id="prof-success" hidden>
+            <p class="success-title">תודה על הפנייה.</p>
+            <p>אקרא את ההודעה אישית ואחזור אליך תוך מספר ימים.</p>
+          </div>
+
+          <div class="form-message form-message-error" id="prof-error" hidden>
+            <p class="error-title">משהו השתבש.</p>
+            <p>אנא נסה שוב, או שלח אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============ CONNECTION FORM ============ -->
+      <div class="tab-content" data-tab-content="connection" role="tabpanel">
+        <div class="tab-intro">
+          <h2 class="tab-title">חיבור והיכרות</h2>
+          <p>
+            יש לך מישהו בראש שיכול לעזור — תורם, איש מקצוע, מקושר במגזר החרדי, רב, או מנהל קרן? מבוא חם שווה פי 100 ממכתב קר. נשמח לדעת מי, ומה הקשר שלך אליו/אליה.
+          </p>
+        </div>
+
+        <form id="connection-form" class="form-card" novalidate>
+          <div class="form-row form-row-2col">
+            <div>
+              <label for="conn-name" class="form-label">השם שלך <span class="required">*</span></label>
+              <input type="text" id="conn-name" name="name" required />
+            </div>
+            <div>
+              <label for="conn-email" class="form-label">האימייל שלך <span class="required">*</span></label>
+              <input type="email" id="conn-email" name="email" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="conn-contact" class="form-label">את מי תרצה/י לחבר אלינו</label>
+            <input type="text" id="conn-contact" name="contact_to_introduce" placeholder="שם + תפקיד / ארגון" />
+          </div>
+
+          <div class="form-row">
+            <label for="conn-why" class="form-label">למה דווקא הוא/היא רלוונטיים</label>
+            <textarea id="conn-why" name="why_relevant" rows="4" placeholder="מה הקשר שלהם לרעיון, מה הם יכולים לתרום"></textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="conn-mentioned" class="form-label">האם הזכרת להם את בית אברהם?</label>
+            <select id="conn-mentioned" name="mentioned_to_them">
+              <option value="">בחר</option>
+              <option value="yes">כן, הם כבר יודעים שאני אכתוב</option>
+              <option value="planning">לא, אעשה את זה אחרי שאשלח לכם</option>
+              <option value="prefer_you_reach">לא, אני מעדיף/ה שאתם תפנו ישירות עם הקשר שלי</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="conn-message" class="form-label">מסר חופשי</label>
+            <textarea id="conn-message" name="message" rows="4"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="conn-submit">שליחת הצעה לחיבור</button>
+          </div>
+
+          <div class="form-message" id="conn-success" hidden>
+            <p class="success-title">תודה על החיבור.</p>
+            <p>אחזור אליך אישית כדי לתאם איך הכי נכון להמשיך.</p>
+          </div>
+
+          <div class="form-message form-message-error" id="conn-error" hidden>
+            <p class="error-title">משהו השתבש.</p>
+            <p>אנא נסה שוב, או שלח אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============ PARTNERSHIP FORM ============ -->
+      <div class="tab-content" data-tab-content="partnership" role="tabpanel">
+        <div class="tab-intro">
+          <h2 class="tab-title">שותפות מימון</h2>
+          <p>
+            תורמים, קרנות פילנתרופיה, או יחידים שמחפשים פרויקט עם השפעה מורשתית. בית אברהם בנוי כך שתורם עוגן מקבל מעמד מייסד, קרדיט קבוע, ושקיפות מלאה — ללא מעורבות ניהולית יומיומית. נשמח לשיחה ראשונית.
+          </p>
+        </div>
+
+        <form id="partnership-form" class="form-card" novalidate>
+          <div class="form-row form-row-2col">
+            <div>
+              <label for="part-name" class="form-label">שם <span class="required">*</span></label>
+              <input type="text" id="part-name" name="name" required />
+            </div>
+            <div>
+              <label for="part-email" class="form-label">אימייל <span class="required">*</span></label>
+              <input type="email" id="part-email" name="email" required />
+            </div>
+          </div>
+
+          <div class="form-row form-row-2col">
+            <div>
+              <label for="part-phone" class="form-label">טלפון (אופציונלי)</label>
+              <input type="tel" id="part-phone" name="phone" />
+            </div>
+            <div>
+              <label for="part-org" class="form-label">ארגון / קרן (אופציונלי)</label>
+              <input type="text" id="part-org" name="organization" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="part-interest" class="form-label">היקף ההתעניינות</label>
+            <select id="part-interest" name="interest_level">
+              <option value="">בחר</option>
+              <option value="initial_meeting">להתחיל בשיחת היכרות</option>
+              <option value="full_document">לקבל את המסמך המלא להיכרות</option>
+              <option value="targeted_donation">לבחון תרומה ייעודית למרכיב מסוים</option>
+              <option value="anchor_donor">להיות תורם עוגן</option>
+              <option value="connecting_to_donor">לחבר תורם פוטנציאלי</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="part-message" class="form-label">מסר חופשי</label>
+            <textarea id="part-message" name="message" rows="5" placeholder="ספר/י קצת על מה שעניין אותך, או על הסוג של פרויקטים שמדברים אליך"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="part-submit">שליחת פנייה</button>
+          </div>
+
+          <div class="form-message" id="part-success" hidden>
+            <p class="success-title">תודה.</p>
+            <p>אחזור אליך אישית בהקדם, וברגע שאשמע ממך — נמצא זמן לשיחה.</p>
+          </div>
+
+          <div class="form-message form-message-error" id="part-error" hidden>
+            <p class="error-title">משהו השתבש.</p>
+            <p>אנא נסה שוב, או שלח אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECT CONTACT ============ -->
+  <section class="direct-contact">
+    <div class="container container-narrow">
+      <div class="direct-grid">
+        <div>
+          <p class="eyebrow">פנייה ישירה</p>
+          <h2 class="section-title small">לא דרך טופס</h2>
+          <p>
+            אם המסר שלך לא מתאים לאף אחד מהמסלולים, או שאתה מעדיף לכתוב באופן חופשי, אפשר תמיד לכתוב לי ישירות. כל הודעה נקראת אישית.
+          </p>
+        </div>
+        <div class="direct-info">
+          <p class="direct-label">אימייל</p>
+          <p><a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a></p>
+          <p class="direct-label">מיקום</p>
+          <p>קרית אתא, ישראל</p>
+          <p class="direct-label">זמן תגובה</p>
+          <p>בדרך כלל תוך 2–5 ימי עסקים</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="footer-logo">בית אברהם</p>
+          <p class="footer-tagline">עולם חסד יבנה — בית אחד לשלושה דורות</p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-label">צרו קשר</p>
+          <p><a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a></p>
+          <p>קרית אתא, ישראל</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 בית אברהם · אבי ברונר</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="forms.js"></script>
+  <script>
+    initTabs();
+    initForm({ formId: 'professional-form', submitId: 'prof-submit', successId: 'prof-success', errorId: 'prof-error', type: 'professional' });
+    initForm({ formId: 'connection-form', submitId: 'conn-submit', successId: 'conn-success', errorId: 'conn-error', type: 'connection' });
+    initForm({ formId: 'partnership-form', submitId: 'part-submit', successId: 'part-success', errorId: 'part-error', type: 'partnership' });
+  </script>
+
+</body>
+</html>

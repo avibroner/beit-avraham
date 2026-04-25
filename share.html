@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>שתפו אותנו — בית אברהם</title>
+  <meta name="description" content="יש לך שאלה, רעיון, או מחשבה על בית אברהם? שתף אותנו." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">בית אברהם</a>
+      <button class="hamburger" aria-label="פתח תפריט" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="topnav">
+        <a href="model.html">הרעיון</a>
+        <a href="about.html">מי אנחנו</a>
+        <a href="faq.html">שאלות</a>
+        <a href="sources.html">מקורות</a>
+        <a href="contact.html">צור קשר</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <p class="eyebrow">שתפו אותנו</p>
+      <h1>יש לך שאלה, רעיון, או מחשבה?</h1>
+      <p class="lede">
+        בית אברהם נבנה גם מהקולות שמסביב. אם משהו עורר בך מחשבה, אם יש לך רעיון לשפר, אם יש לך שאלה שלא מצאת לה תשובה באתר, או אם פשוט רצית לכתוב לנו משהו אישי — זה המקום. כל הודעה נקראת אישית.
+      </p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+
+      <form id="share-form" class="form-card" novalidate>
+        <div class="form-row">
+          <label for="share-category" class="form-label">סוג ההודעה</label>
+          <div class="radio-group" role="radiogroup">
+            <label class="radio-option">
+              <input type="radio" name="category" value="question" required />
+              <span>שאלה</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="idea" />
+              <span>רעיון לשיפור</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="thought" />
+              <span>מחשבה אישית</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="feedback" />
+              <span>משוב על האתר</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="share-content" class="form-label">התוכן <span class="required">*</span></label>
+          <textarea id="share-content" name="content" rows="7" required placeholder="כתוב כאן את מה שעל ליבך. אין צורך לעצב או לקצר — תכתוב כמו שזה בא."></textarea>
+        </div>
+
+        <div class="form-divider">פרטים אישיים — אופציונלי</div>
+
+        <div class="form-row form-row-2col">
+          <div>
+            <label for="share-name" class="form-label">שם (אופציונלי)</label>
+            <input type="text" id="share-name" name="name" placeholder="אפשר להישאר אנונימי" />
+          </div>
+          <div>
+            <label for="share-email" class="form-label">אימייל (אופציונלי)</label>
+            <input type="email" id="share-email" name="email" placeholder="רק אם תרצה תשובה" />
+          </div>
+        </div>
+
+        <p class="form-note">
+          השם והאימייל אינם חובה. אם תשאיר אימייל, אנסה לחזור אליך אישית. אחרת, השאלה עשויה להופיע בעמוד השאלות הנפוצות.
+        </p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="share-submit">שליחה</button>
+        </div>
+
+        <div class="form-message" id="share-success" hidden>
+          <p class="success-title">תודה.</p>
+          <p>ההודעה התקבלה. אקרא אותה אישית.</p>
+        </div>
+
+        <div class="form-message form-message-error" id="share-error" hidden>
+          <p class="error-title">משהו השתבש.</p>
+          <p>אנא נסה שוב, או שלח אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.</p>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="footer-logo">בית אברהם</p>
+          <p class="footer-tagline">עולם חסד יבנה — בית אחד לשלושה דורות</p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-label">צרו קשר</p>
+          <p><a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a></p>
+          <p>קרית אתא, ישראל</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 בית אברהם · אבי ברונר</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="forms.js"></script>
+  <script>
+    initForm({
+      formId: 'share-form',
+      submitId: 'share-submit',
+      successId: 'share-success',
+      errorId: 'share-error',
+      type: 'share'
+    });
+  </script>
+
+</body>
+</html>
