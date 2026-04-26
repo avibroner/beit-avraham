@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share with Us — Beit Avraham</title>
+  <meta name="description" content="Have a question, an idea, or a thought about Beit Avraham? Share it with us." />
+  <link rel="alternate" hreflang="he" href="../share.html" />
+  <link rel="alternate" hreflang="en" href="share.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">Beit Avraham</a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="topnav">
+        <a href="model.html">The Idea</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="sources.html">Research</a>
+        <a href="contact.html">Get in Touch</a>
+        <a href="../share.html" class="lang-toggle" hreflang="he" lang="he">עב</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <p class="eyebrow">Share with Us</p>
+      <h1>Have a question, an idea, or a thought?</h1>
+      <p class="lede">
+        Beit Avraham is also being built from the voices around it. If something here got you thinking, if you have an idea to improve it, if you have a question you didn't find an answer to on the site, or if you simply want to write us something personal — this is the place. Every message is read personally.
+      </p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+
+      <form id="share-form" class="form-card" novalidate>
+        <div class="form-row">
+          <label for="share-category" class="form-label">Type of message</label>
+          <div class="radio-group" role="radiogroup">
+            <label class="radio-option">
+              <input type="radio" name="category" value="question" required />
+              <span>Question</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="idea" />
+              <span>Idea for improvement</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="thought" />
+              <span>Personal thought</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="category" value="feedback" />
+              <span>Feedback on the site</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="share-content" class="form-label">Your message <span class="required">*</span></label>
+          <textarea id="share-content" name="content" rows="7" required placeholder="Write whatever's on your mind. No need to polish or shorten — write as it comes."></textarea>
+        </div>
+
+        <div class="form-divider">Personal details — optional</div>
+
+        <div class="form-row form-row-2col">
+          <div>
+            <label for="share-name" class="form-label">Name (optional)</label>
+            <input type="text" id="share-name" name="name" placeholder="You can stay anonymous" />
+          </div>
+          <div>
+            <label for="share-email" class="form-label">Email (optional)</label>
+            <input type="email" id="share-email" name="email" placeholder="Only if you'd like a reply" />
+          </div>
+        </div>
+
+        <p class="form-note">
+          Name and email are not required. If you leave an email, I'll try to reply personally. Otherwise, the question may appear on the FAQ page.
+        </p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="share-submit">Send</button>
+        </div>
+      </form>
+
+      <div class="form-message" id="share-success" hidden>
+        <p class="success-title">Thank you.</p>
+        <p>Your message arrived. I'll read it personally.</p>
+      </div>
+
+      <div class="form-message form-message-error" id="share-error" hidden>
+        <p class="error-title">Something went wrong.</p>
+        <p>Please try again, or send a direct email to <a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="footer-logo">Beit Avraham</p>
+          <p class="footer-tagline">Olam chesed yibaneh — one home for three generations</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <p class="footer-label">Navigation</p>
+          <a href="index.html">Home</a>
+          <a href="model.html">The Idea</a>
+          <a href="about.html">About</a>
+          <a href="faq.html">FAQ</a>
+          <a href="sources.html">Research</a>
+          <a href="contact.html">Get in Touch</a>
+        </nav>
+        <div class="footer-contact">
+          <p class="footer-label">Contact</p>
+          <p><a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a></p>
+          <p>Kiryat Ata, Israel</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Beit Avraham · Avi Broner</p>
+        <button type="button" class="share-btn" data-share-trigger>Share with us ✨</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../config.js"></script>
+  <script src="../tracking.js" defer></script>
+  <script src="../share.js" defer></script>
+  <script src="../forms.js"></script>
+  <script>
+    initForm({
+      formId: 'share-form',
+      submitId: 'share-submit',
+      successId: 'share-success',
+      errorId: 'share-error',
+      type: 'share'
+    });
+  </script>
+
+</body>
+</html>

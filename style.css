@@ -1694,3 +1694,106 @@ p:last-child { margin-bottom: 0; }
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
+/* =============================================================
+   LANGUAGE TOGGLE (HE / EN)
+   ============================================================= */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: 28px;
+  padding: 6px 12px;
+  border: 1px solid rgba(42, 31, 24, 0.18);
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: #4A3D32;
+  background: rgba(255,255,255,0.55);
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.lang-toggle:hover {
+  border-color: #9B7B3D;
+  color: #9B7B3D;
+}
+@media (max-width: 768px) {
+  .lang-toggle {
+    margin-inline-start: 0;
+    margin-top: 12px;
+    align-self: flex-start;
+  }
+}
+
+/* =============================================================
+   ENGLISH / LTR OVERRIDES
+   When html[dir="ltr"] is set on the English pages, flip the
+   direction-sensitive rules and switch to a Latin font pair.
+   ============================================================= */
+html[dir="ltr"] body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+html[dir="ltr"] h1,
+html[dir="ltr"] h2,
+html[dir="ltr"] h3,
+html[dir="ltr"] h4 {
+  font-family: 'Lora', 'Frank Ruhl Libre', Georgia, serif;
+}
+html[dir="ltr"] .brand,
+html[dir="ltr"] .footer-logo,
+html[dir="ltr"] .section-title,
+html[dir="ltr"] .faq-category-title,
+html[dir="ltr"] .success-title,
+html[dir="ltr"] .error-title,
+html[dir="ltr"] .faq-cta-text,
+html[dir="ltr"] blockquote {
+  font-family: 'Lora', 'Frank Ruhl Libre', Georgia, serif;
+}
+
+html[dir="ltr"] blockquote {
+  border-right: none;
+  border-left: 3px solid #9B7B3D;
+  padding: .25rem 0 .25rem 1.5rem;
+}
+
+html[dir="ltr"] .model-list li {
+  padding-right: 0;
+  padding-left: 24px;
+}
+html[dir="ltr"] .model-list li::before {
+  right: auto;
+  left: 0;
+}
+
+html[dir="ltr"] .recruit-list li {
+  padding-right: 0;
+  padding-left: 24px;
+}
+html[dir="ltr"] .recruit-list li::before {
+  right: auto;
+  left: 0;
+}
+
+html[dir="ltr"] .form-card select {
+  background-position: calc(100% - 16px) center;
+  padding-left: 16px;
+  padding-right: 40px;
+}
+
+html[dir="ltr"] .form-message {
+  border-right: none;
+  border-left: 4px solid #9B7B3D;
+}
+html[dir="ltr"] .form-message-error {
+  border-left-color: #A8523A;
+}
+
+html[dir="ltr"] .contact-exit-banner a {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* Re-balance the topbar in LTR — brand on the left, nav on the right */
+html[dir="ltr"] .topnav a.active {
+  color: #9B7B3D;
+}

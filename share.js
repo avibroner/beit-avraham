@@ -96,21 +96,33 @@
     return inFlight;
   }
 
+  function isEnglish() {
+    return (document.documentElement.lang || '').toLowerCase().startsWith('en');
+  }
+
+  const TXT = {
+    creating:  { he: 'יוצר לינק…',                                              en: 'Creating link…' },
+    copied:    { he: 'הלינק הועתק ✨ שתפו עם מי שזה ידבר אליו',                en: 'Link copied ✨ share it with someone it might speak to' },
+    yourLink:  { he: 'הלינק שלכם: ',                                            en: 'Your link: ' },
+    error:     { he: 'משהו השתבש. נסו שוב או שלחו ל-avi@futureflow.co.il', en: 'Something went wrong. Please try again or email avi@futureflow.co.il' }
+  };
+  function t(key) { return TXT[key][isEnglish() ? 'en' : 'he']; }
+
   async function handleShareClick(button) {
     const original = button.textContent;
     button.disabled = true;
-    button.textContent = 'יוצר לינק…';
+    button.textContent = t('creating');
     try {
       const url = await createShareLink();
       const copied = await copyToClipboard(url);
       if (copied) {
-        showToast('הלינק הועתק ✨ שתפו עם מי שזה ידבר אליו');
+        showToast(t('copied'));
       } else {
-        showToast('הלינק שלכם: ' + url);
+        showToast(t('yourLink') + url);
       }
     } catch (err) {
       console.error(err);
-      showToast('משהו השתבש. נסו שוב או שלחו ל-avi@futureflow.co.il');
+      showToast(t('error'));
     } finally {
       button.disabled = false;
       button.textContent = original;
