@@ -1307,6 +1307,32 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* =============================================================
+   CONTACT EXIT BANNER — link out to share form
+   ============================================================= */
+.contact-exit-banner {
+  padding: 18px 0;
+  background: #FAF7F0;
+  border-bottom: 1px solid rgba(42, 31, 24, 0.08);
+}
+.contact-exit-banner p {
+  margin: 0;
+  text-align: center;
+  font-size: .98rem;
+  color: #4A3D32;
+}
+.contact-exit-banner a {
+  color: #9B7B3D;
+  border-bottom: 1px solid #9B7B3D;
+  font-weight: 500;
+  margin-right: 6px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.contact-exit-banner a:hover {
+  color: #856626;
+  border-bottom-color: #856626;
+}
+
+/* =============================================================
    CONTACT TABS
    ============================================================= */
 .contact-section {
