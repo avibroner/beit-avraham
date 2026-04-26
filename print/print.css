@@ -1,0 +1,438 @@
+/* =============================================================
+   בית אברהם — Print Stylesheet (PDF for Rabbis)
+   Optimized for A4, Hebrew RTL, Puppeteer headless Chrome
+   Palette inherits from main site:
+     ink-brown #2A1F18 · cream #FAF7F0 · olive-gold #9B7B3D
+   Type: Frank Ruhl Libre (display) + Heebo (body)
+   ============================================================= */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #FAF7F0;
+  color: #2A1F18;
+  font-family: 'Heebo', system-ui, sans-serif;
+  font-size: 11.5pt;
+  line-height: 1.65;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: optimizeLegibility;
+}
+
+/* כל סקציה היא עמוד עצמאי */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 22mm 18mm 22mm 18mm;
+  page-break-after: always;
+  page-break-inside: auto;
+  position: relative;
+}
+
+.page:last-child {
+  page-break-after: auto;
+}
+
+/* -------- טיפוגרפיה -------- */
+h1, h2, h3, h4 {
+  font-family: 'Frank Ruhl Libre', 'Heebo', serif;
+  color: #2A1F18;
+  letter-spacing: -0.01em;
+  page-break-after: avoid;
+}
+
+h1 { font-weight: 900; line-height: 1.1; }
+h2 { font-weight: 700; line-height: 1.2; }
+h3 { font-weight: 700; line-height: 1.3; }
+
+p {
+  margin-bottom: 0.7rem;
+  orphans: 3;
+  widows: 3;
+}
+p:last-child { margin-bottom: 0; }
+
+strong { font-weight: 700; color: #2A1F18; }
+em { font-style: italic; }
+
+blockquote {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-style: italic;
+  font-size: 14pt;
+  line-height: 1.5;
+  color: #2A1F18;
+  border-right: 3px solid #9B7B3D;
+  padding: 0.4rem 1.2rem 0.4rem 0;
+  margin: 1.3rem 0;
+  page-break-inside: avoid;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  font-size: 10pt;
+  color: #6B5A4A;
+}
+
+ul.model-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+ul.model-list li {
+  position: relative;
+  padding-right: 1.2rem;
+  margin-bottom: 0.7rem;
+  page-break-inside: avoid;
+}
+ul.model-list li::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0.65rem;
+  width: 6px;
+  height: 6px;
+  background: #9B7B3D;
+  border-radius: 50%;
+}
+
+.eyebrow {
+  font-size: 9pt;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #9B7B3D;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 700;
+  font-size: 26pt;
+  line-height: 1.18;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.015em;
+}
+
+.section-lede {
+  font-size: 13pt;
+  line-height: 1.6;
+  color: #4A3D32;
+  margin-bottom: 1.6rem;
+}
+
+.lead-para {
+  font-size: 12.5pt;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  color: #2A1F18;
+}
+
+.subsection-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 16pt;
+  font-weight: 700;
+  margin-top: 1.6rem;
+  margin-bottom: 0.7rem;
+  color: #2A1F18;
+  page-break-after: avoid;
+}
+
+.conclusion {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 14pt;
+  font-style: italic;
+  font-weight: 500;
+  color: #9B7B3D;
+  margin-top: 1.4rem;
+}
+
+/* -------- עמוד שער -------- */
+.cover {
+  background: linear-gradient(180deg, #FAF7F0 0%, #F2EBDC 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-inner {
+  text-align: center;
+  max-width: 140mm;
+}
+
+.cover-eyebrow {
+  font-size: 10pt;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: #9B7B3D;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+.cover-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 64pt;
+  font-weight: 900;
+  line-height: 1;
+  color: #2A1F18;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.cover-tagline {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-style: italic;
+  font-size: 17pt;
+  color: #4A3D32;
+  margin-bottom: 2.5rem;
+}
+
+.cover-divider {
+  width: 60px;
+  height: 2px;
+  background: #9B7B3D;
+  margin: 0 auto 2.5rem;
+}
+
+.cover-blurb {
+  font-size: 13pt;
+  line-height: 1.75;
+  color: #2A1F18;
+  margin-bottom: 4rem;
+  max-width: 110mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cover-meta {
+  font-size: 10.5pt;
+  color: #6B5A4A;
+  line-height: 1.9;
+}
+
+.cover-meta p:first-child {
+  font-weight: 500;
+  color: #2A1F18;
+}
+
+/* -------- כרטיסי אוכלוסיות (פרק ב) -------- */
+.pop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.pop-card {
+  background: #FFFFFF;
+  border: 1px solid #E8DFCC;
+  border-radius: 4px;
+  padding: 1rem 1.1rem;
+  page-break-inside: avoid;
+}
+
+.pop-label {
+  font-size: 9pt;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #9B7B3D;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.pop-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 14pt;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.pop-card p {
+  font-size: 10.5pt;
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+/* -------- כרטיסי ייחוד (פרק ג) -------- */
+.unique-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.unique-card {
+  page-break-inside: avoid;
+  padding: 0.8rem 0;
+  border-top: 1px solid #E8DFCC;
+}
+
+.unique-num {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 22pt;
+  font-weight: 900;
+  color: #9B7B3D;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.unique-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.unique-card p {
+  font-size: 10.5pt;
+  line-height: 1.55;
+}
+
+/* -------- ציטוט מייסד -------- */
+.founder-quote-personal {
+  font-style: italic;
+  color: #4A3D32;
+  margin-top: -0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+/* -------- שאלות ותשובות (פרק ה) -------- */
+.qa-item {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E8DFCC;
+  page-break-inside: avoid;
+}
+
+.qa-item:last-child {
+  border-bottom: none;
+}
+
+.qa-q {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #2A1F18;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.qa-q::before {
+  content: 'ש. ';
+  color: #9B7B3D;
+  font-weight: 900;
+}
+
+.qa-a {
+  font-size: 11pt;
+  line-height: 1.65;
+  color: #2A1F18;
+  padding-right: 1.2rem;
+  position: relative;
+}
+
+.qa-a::before {
+  content: 'ת. ';
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  color: #9B7B3D;
+}
+
+/* -------- מפת דרכים (פרק ו) -------- */
+.roadmap {
+  margin: 1.2rem 0;
+}
+
+.roadmap-item {
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.8rem;
+  border-right: 3px solid #9B7B3D;
+  background: rgba(155, 123, 61, 0.05);
+  page-break-inside: avoid;
+}
+
+.roadmap-num {
+  font-size: 9pt;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9B7B3D;
+  margin-bottom: 0.3rem;
+}
+
+.roadmap-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.roadmap-item p:last-child {
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: #2A1F18;
+}
+
+.roadmap-note {
+  font-size: 9.5pt;
+  font-style: italic;
+  color: #6B5A4A;
+  margin-bottom: 1.6rem;
+}
+
+/* -------- בלוק סיום + יצירת קשר -------- */
+.closing-block {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E8DFCC;
+  page-break-inside: avoid;
+}
+
+.contact-card {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.4rem;
+  background: #FFFFFF;
+  border: 1px solid #E8DFCC;
+  border-right: 3px solid #9B7B3D;
+  border-radius: 4px;
+  page-break-inside: avoid;
+}
+
+.contact-title {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #2A1F18;
+}
+
+.contact-line {
+  font-size: 11pt;
+  line-height: 1.7;
+  margin-bottom: 0.2rem !important;
+  color: #2A1F18;
+}
+
+.contact-line.site-line {
+  margin-top: 0.5rem !important;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #E8DFCC;
+  color: #4A3D32;
+}
+
+.closing-quote {
+  text-align: center;
+  margin-top: 2rem;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-style: italic;
+  font-size: 13pt;
+  color: #9B7B3D;
+}
