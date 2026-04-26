@@ -293,8 +293,7 @@ p:last-child { margin-bottom: 0; }
   font-style: normal;
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   color: #4A3D32;
-  margin-top: -1.5rem;
-  margin-bottom: 2.5rem;
+  margin: -1.5rem auto 2.5rem;
   line-height: 1.65;
   max-width: 760px;
 }
@@ -302,6 +301,15 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  justify-content: center;
+}
+.section-divider {
+  width: 60px;
+  height: 1px;
+  background: #9B7B3D;
+  border: 0;
+  margin: 0 auto;
+  opacity: 0.45;
 }
 @media (max-width: 480px) {
   .hero-actions {
