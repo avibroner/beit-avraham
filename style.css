@@ -311,6 +311,39 @@ p:last-child { margin-bottom: 0; }
   margin: 0 auto;
   opacity: 0.45;
 }
+
+/* -------- Problem section -------- */
+.problem {
+  padding: 80px 0;
+  background: #F4EFE5;
+  text-align: center;
+}
+.problem-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto 2.5rem;
+  max-width: 640px;
+  display: grid;
+  gap: 1rem;
+}
+.problem-list li {
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  color: #2A1F18;
+  line-height: 1.5;
+}
+.problem-list li strong {
+  color: #9B7B3D;
+  font-weight: 700;
+}
+.problem-conclusion {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: #4A3D32;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
 @media (max-width: 480px) {
   .hero-actions {
     flex-direction: column;
