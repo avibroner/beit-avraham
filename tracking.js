@@ -4,6 +4,10 @@
    - Generates a stable session UUID per browser, persists to localStorage.
    - Writes a page-view row directly to Supabase (anon insert).
    - Exposes window.bvCtx = { short_code, session_id } for other scripts.
+
+   Note: silent catch (_) blocks below — localStorage and fetch may
+   throw in Safari private mode or locked-down browsers. Tracking must
+   never break the site, so failures are swallowed.
    ============================================================= */
 (function () {
   const cfg = window.BV_CONFIG || {};

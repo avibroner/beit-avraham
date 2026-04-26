@@ -9,3 +9,7 @@ window.BV_CONFIG = {
   SUPABASE_SCHEMA: 'beit_avraham',
   SITE_BASE_URL: 'https://beit-avraham.site'
 };
+
+window.bvIsEnglish = function () {
+  return (document.documentElement.lang || '').toLowerCase().startsWith('en');
+};

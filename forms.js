@@ -109,8 +109,7 @@ function initTabs() {
     activate(hash);
     if (tabsContainer) tabsContainer.style.display = 'none';
     if (pageLede) {
-      const isEn = (document.documentElement.lang || '').toLowerCase().startsWith('en');
-      pageLede.innerHTML = isEn
+      pageLede.innerHTML = window.bvIsEnglish()
         ? 'If this track doesn\'t fit, you can <a href="contact.html">see all tracks</a> or send a direct email to <a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.'
         : 'אם המסלול שלפניך לא מתאים, אפשר <a href="contact.html">לראות את כל המסלולים</a> או לשלוח אימייל ישיר ל־<a href="mailto:avi@futureflow.co.il">avi@futureflow.co.il</a>.';
     }
@@ -142,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!hamburger || !nav) return;
 
   // Localize the aria-label on the hamburger if the page is in English
-  if ((document.documentElement.lang || '').toLowerCase().startsWith('en')) {
+  if (window.bvIsEnglish()) {
     hamburger.setAttribute('aria-label', 'Open menu');
   }
 
