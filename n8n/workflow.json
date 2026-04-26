@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Beit Avraham — Form Notifier",
+    "active": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "bv/notify",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [-200, 0],
+        "id": "9f1a4e80-aaaa-4bbb-8ccc-000000000001",
+        "name": "Webhook",
+        "webhookId": "bv-notify-webhook"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Build the WhatsApp text + email subject/body from the Supabase trigger payload.\nconst TYPES = {\n  professional: 'פנייה מקצועית',\n  connection: 'הצעת חיבור',\n  partnership: 'שותפות מימון',\n  share: 'שתפו אותנו'\n};\n\nconst body = $input.first().json.body || $input.first().json;\nconst d = body.data || {};\nconst link = body.link || null;\n\nlet linkLine = '';\nif (link) {\n  if (link.source_type === 'curated') {\n    const role = link.curated_for_role ? ' (' + link.curated_for_role + ')' : '';\n    linkLine = '🔗 הגיע מ: ' + (link.curated_for_name || '') + role;\n  } else if (link.source_type === 'self') {\n    linkLine = '🔁 הגיע ע\"י שיתוף של: ' + (link.self_optional_name || 'אנונימי');\n  }\n}\n\nconst lines = [\n  '🎯 טופס חדש — ' + (TYPES[body.type] || body.type),\n  d.name ? '👤 ' + d.name : null,\n  d.email ? '📧 ' + d.email : null,\n  d.phone ? '📞 ' + d.phone : null,\n  linkLine || null,\n  '',\n  d.message ? '💬 ' + String(d.message).slice(0, 400) : null,\n  d.content ? '💬 ' + String(d.content).slice(0, 400) : null\n].filter(Boolean);\n\nconst waText = lines.join('\\n');\nconst subject = 'בית אברהם — ' + (TYPES[body.type] || body.type) + ' — ' + (d.name || 'אנונימי');\n\nconst rows = Object.entries(d).map(([k, v]) => '<tr><td style=\"padding:6px 12px;color:#666;\">' + k + '</td><td style=\"padding:6px 12px;\">' + String(v).replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '</td></tr>').join('');\nconst html = '<div style=\"direction:rtl;text-align:right;font-family:Heebo,Arial,sans-serif;\">' +\n  '<h2>' + subject + '</h2>' +\n  (linkLine ? '<p>' + linkLine + '</p>' : '') +\n  '<table style=\"border-collapse:collapse;border:1px solid #eee;\">' + rows + '</table>' +\n  '<p style=\"color:#888;font-size:12px;margin-top:24px;\">submission_id: ' + body.submission_id + '<br>session_id: ' + body.session_id + '<br>short_code: ' + (body.short_code || '(none)') + '</p>' +\n  '</div>';\n\nreturn [{ json: { wa_text: waText, email_subject: subject, email_html: html, wa_to: '972515120079', email_to: 'avi@futureflow.co.il', raw: body } }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [40, 0],
+        "id": "9f1a4e80-aaaa-4bbb-8ccc-000000000002",
+        "name": "Build Messages"
+      },
+      {
+        "parameters": {
+          "resource": "message",
+          "operation": "sendText",
+          "chatId": "={{ $json.wa_to }}@c.us",
+          "message": "={{ $json.wa_text }}"
+        },
+        "type": "n8n-nodes-greenapi.greenapi",
+        "typeVersion": 1,
+        "position": [320, -100],
+        "id": "9f1a4e80-aaaa-4bbb-8ccc-000000000003",
+        "name": "WhatsApp: Send",
+        "continueOnFail": true,
+        "notes": "Connect a GreenAPI credential after import."
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.email_to }}",
+          "subject": "={{ $json.email_subject }}",
+          "emailType": "html",
+          "message": "={{ $json.email_html }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [320, 100],
+        "id": "9f1a4e80-aaaa-4bbb-8ccc-000000000004",
+        "name": "Gmail: Send",
+        "continueOnFail": true,
+        "notes": "Connect a Gmail OAuth2 credential after import."
+      },
+      {
+        "parameters": {
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [620, 0],
+        "id": "9f1a4e80-aaaa-4bbb-8ccc-000000000005",
+        "name": "Respond"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [[{ "node": "Build Messages", "type": "main", "index": 0 }]]
+      },
+      "Build Messages": {
+        "main": [[
+          { "node": "WhatsApp: Send", "type": "main", "index": 0 },
+          { "node": "Gmail: Send", "type": "main", "index": 0 }
+        ]]
+      },
+      "WhatsApp: Send": {
+        "main": [[{ "node": "Respond", "type": "main", "index": 0 }]]
+      },
+      "Gmail: Send": {
+        "main": [[{ "node": "Respond", "type": "main", "index": 0 }]]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "pinData": {}
+  }
+]

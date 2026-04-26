@@ -1,20 +1,9 @@
 /* =============================================================
    בית אברהם — Forms JavaScript
-   Submits forms to Supabase via REST API.
-   Configure SUPABASE_URL and SUPABASE_ANON_KEY below.
+   Submits directly to Supabase (anon insert into beit_avraham.submissions).
+   A DB trigger forwards the submission to n8n which sends WhatsApp + Email alerts.
    ============================================================= */
 
-// === CONFIGURATION — REPLACE THESE TWO LINES ===
-const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_PUBLIC_KEY';
-const SUPABASE_TABLE = 'beit_avraham_submissions';
-// =================================================
-
-/**
- * Wires up a form to submit to Supabase.
- * Pass an object with the IDs of form, submit button, success/error messages,
- * and the type of submission (e.g. 'share', 'professional', 'connection', 'partnership').
- */
 function initForm({ formId, submitId, successId, errorId, type }) {
   const form = document.getElementById(formId);
   const submit = document.getElementById(submitId);
@@ -32,26 +21,39 @@ function initForm({ formId, submitId, successId, errorId, type }) {
     }
 
     const data = collectFormData(form);
+    const ctx = window.bvCtx || {};
+    const cfg = window.BV_CONFIG || {};
 
     const originalLabel = submit.textContent;
     submit.disabled = true;
     submit.textContent = 'שולח...';
     if (error) error.hidden = true;
 
+    const payload = {
+      type,
+      data,
+      short_code: ctx.short_code || null,
+      session_id: ctx.session_id || null,
+      user_agent: navigator.userAgent
+    };
+
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
+      const url = `${cfg.SUPABASE_URL}/rest/v1/submissions`;
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
+          'Content-Profile': cfg.SUPABASE_SCHEMA || 'beit_avraham',
+          'apikey': cfg.SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + cfg.SUPABASE_ANON_KEY,
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({ type, data })
+        body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error(`Submission failed: ${response.status}`);
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error(`Submission failed: ${res.status} ${body}`);
       }
 
       form.style.display = 'none';

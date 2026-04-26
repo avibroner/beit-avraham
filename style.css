@@ -800,13 +800,81 @@ p:last-child { margin-bottom: 0; }
   padding-top: 24px;
   font-size: .9rem;
   color: rgba(240, 232, 213, 0.55);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
 }
+.footer-bottom p { margin: 0; }
 
 @media (max-width: 900px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 @media (max-width: 600px) {
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* Share button — slim, used in footer + inline CTAs */
+.share-btn {
+  background: transparent;
+  border: 1px solid rgba(240, 232, 213, 0.35);
+  color: #F0E8D5;
+  font-family: inherit;
+  font-size: .92rem;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.share-btn:hover:not(:disabled) {
+  background: rgba(201, 165, 95, 0.12);
+  border-color: #C9A55F;
+  color: #C9A55F;
+}
+.share-btn:disabled { opacity: .6; cursor: progress; }
+
+/* Inline share CTA — light theme variant for in-page use */
+.share-btn-inline {
+  background: #2A1F18;
+  border: 1px solid #2A1F18;
+  color: #F0E8D5;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s ease, transform .15s ease;
+}
+.share-btn-inline:hover:not(:disabled) {
+  background: #3a2c22;
+  transform: translateY(-1px);
+}
+.share-btn-inline:disabled { opacity: .6; cursor: progress; }
+
+/* Toast — bottom-center, fades in/out */
+.bv-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #2A1F18;
+  color: #F0E8D5;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: .98rem;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 9999;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.bv-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* =============================================================
