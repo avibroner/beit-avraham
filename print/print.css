@@ -6,22 +6,31 @@
    Type: Frank Ruhl Libre (display) + Heebo (body)
    ============================================================= */
 
-/* @page נותן מרג'ינים אמיתיים לכל עמוד פיזי שנדפס,
-   כך שגם כשסקציה גולשת לעמוד שני התוכן לא נחתך בקצה. */
+/* @page margin: 0 כדי שהרקע הקרם של ה-body יגיע מקצה לקצה הדף בכל עמוד.
+   המרג'ינים הפנימיים ניתנים על .page (padding) — ולא דרך @page —
+   כך שכל סקציה היא עמוד עצמאי שלא גולש למשנהו.
+   :left ו-:right מוגדרים מפורש כי Chromium לפעמים נותן להם default-margin שונה
+   ב-RTL — מה שגורם לרצועה לבנה אסימטרית בעמודים מסויימים. */
 @page {
   size: A4;
-  margin: 20mm 18mm;
-}
-
-/* עמוד השער הוא full-bleed: בלי מרג'ינים כדי שהגרדיינט יגיע לקצוות. */
-@page :first {
   margin: 0;
 }
+@page :left { margin: 0; }
+@page :right { margin: 0; }
+@page :first { margin: 0; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+html {
+  width: 100%;
   background: #FAF7F0;
+  direction: rtl;
+}
+
+body {
+  width: 100%;
+  background: #FAF7F0;
+  direction: rtl;
   color: #2A1F18;
   font-family: 'Heebo', system-ui, sans-serif;
   font-size: 11.5pt;
@@ -31,15 +40,24 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* כל סקציה מסתיימת בעמוד עצמאי. אין יותר min-height — התוכן זורם. */
+/* כל סקציה היא עמוד עצמאי. .page = שכבת רקע ברוחב מלא של העמוד.
+   ה-padding עובר ל-.page-inner — כך ש-.page עצמו אף פעם לא "מצטמצם"
+   ב-Chromium PDF generation והקרם תמיד מגיע מקצה לקצה. */
 .page {
+  width: 100%;
   page-break-after: always;
   page-break-inside: auto;
+  background: #FAF7F0;
 }
 
 .page:last-child {
   page-break-after: auto;
 }
+
+.page-inner {
+  padding: 22mm 18mm;
+}
+
 
 /* -------- טיפוגרפיה -------- */
 h1, h2, h3, h4 {
@@ -245,7 +263,7 @@ figcaption {
   margin: 0 auto;
 }
 
-/* -------- עמוד שער (full-bleed עם @page :first margin: 0) -------- */
+/* -------- עמוד שער -------- */
 .cover {
   background: linear-gradient(180deg, #FAF7F0 0%, #F2EBDC 100%);
   height: 297mm;
@@ -438,6 +456,42 @@ figcaption {
   right: 0;
   font-weight: 700;
   color: #9B7B3D;
+}
+
+/* -------- כפתור CTA לשאלות נוספות באתר -------- */
+.faq-cta-wrap {
+  text-align: center;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #E8DFCC;
+  page-break-inside: avoid;
+}
+
+.faq-cta-text {
+  font-size: 10.5pt;
+  color: #4A3D32;
+  margin-bottom: 0.8rem;
+  line-height: 1.55;
+}
+
+.faq-cta-button {
+  display: inline-block;
+  padding: 0.65rem 1.6rem;
+  background: #9B7B3D;
+  color: #FFFFFF !important;
+  font-family: 'Heebo', sans-serif;
+  font-size: 11pt;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.faq-cta-url {
+  margin-top: 0.6rem;
+  font-size: 9pt;
+  color: #6B5A4A;
+  letter-spacing: 0.02em;
 }
 
 /* -------- מפת דרכים (פרק ו) -------- */

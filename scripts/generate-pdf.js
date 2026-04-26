@@ -13,19 +13,9 @@ const SOURCE_HTML = path.join(PROJECT_ROOT, 'print', 'document.html');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'dist');
 const OUTPUT_PDF = path.join(OUTPUT_DIR, 'beit-avraham.pdf');
 
-// Header/Footer של Puppeteer מופיעים בשולי ה-@page,
-// כך שהם מופיעים בכל עמוד מלבד עמוד השער (שמוגדר ב-CSS עם margin: 0).
-const HEADER_TEMPLATE = `
-  <div style="font-size:8pt;width:100%;text-align:center;color:#9B7B3D;font-family:Heebo,sans-serif;padding:0 18mm;">
-    בית אברהם · בית אחד לשלושה דורות
-  </div>
-`;
-
-const FOOTER_TEMPLATE = `
-  <div style="font-size:8pt;width:100%;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;padding:0 18mm;">
-    עמוד <span class="pageNumber"></span> מתוך <span class="totalPages"></span>
-  </div>
-`;
+// Header/Footer הוסרו: רוצים רקע קרם מלא מקצה לקצה בכל עמוד,
+// וזה מצריך @page margin: 0 ב-CSS — מה שלא משאיר מקום ל-header/footer
+// של Puppeteer. אם נצטרך מספרי עמודים בעתיד, אפשר להוסיף דרך CSS @page counter.
 
 async function generatePDF() {
   if (!fs.existsSync(SOURCE_HTML)) {
@@ -60,9 +50,8 @@ async function generatePDF() {
       format: 'A4',
       printBackground: true,
       preferCSSPageSize: true,
-      displayHeaderFooter: true,
-      headerTemplate: HEADER_TEMPLATE,
-      footerTemplate: FOOTER_TEMPLATE,
+      displayHeaderFooter: false,
+      margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' },
     });
 
     const stats = fs.statSync(OUTPUT_PDF);
