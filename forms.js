@@ -12,7 +12,7 @@ function initForm({ formId, submitId, successId, errorId, type }) {
 
   if (!form || !submit) return;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (!form.checkValidity()) {
@@ -24,10 +24,12 @@ function initForm({ formId, submitId, successId, errorId, type }) {
     const ctx = window.bvCtx || {};
     const cfg = window.BV_CONFIG || {};
 
-    const originalLabel = submit.textContent;
-    submit.disabled = true;
-    submit.textContent = 'שולח...';
     if (error) error.hidden = true;
+
+    // Optimistic UI: show success immediately. Send in the background.
+    form.style.display = 'none';
+    if (success) success.hidden = false;
+    success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     const payload = {
       type,
@@ -37,34 +39,27 @@ function initForm({ formId, submitId, successId, errorId, type }) {
       user_agent: navigator.userAgent
     };
 
-    try {
-      const url = `${cfg.SUPABASE_URL}/rest/v1/submissions`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Profile': cfg.SUPABASE_SCHEMA || 'beit_avraham',
-          'apikey': cfg.SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + cfg.SUPABASE_ANON_KEY,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) {
-        const body = await res.text();
-        throw new Error(`Submission failed: ${res.status} ${body}`);
-      }
-
-      form.style.display = 'none';
-      if (success) success.hidden = false;
-      success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } catch (err) {
-      console.error(err);
-      submit.disabled = false;
-      submit.textContent = originalLabel;
+    const url = `${cfg.SUPABASE_URL}/rest/v1/submissions`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Profile': cfg.SUPABASE_SCHEMA || 'beit_avraham',
+        'apikey': cfg.SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + cfg.SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).then((res) => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    }).catch((err) => {
+      console.error('Submission failed:', err);
+      // Revert optimistic UI and show error
+      if (success) success.hidden = true;
+      form.style.display = '';
       if (error) error.hidden = false;
-    }
+    });
   });
 }
 
