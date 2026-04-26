@@ -1,6 +1,6 @@
 /**
  * generate-pdf.js
- * מייצר את ה-PDF הרבני של בית אברהם מתוך print/rabbanim.html.
+ * מייצר את מסמך המבוא של בית אברהם מתוך print/document.html.
  * הרצה: npm run pdf
  */
 
@@ -9,18 +9,20 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const SOURCE_HTML = path.join(PROJECT_ROOT, 'print', 'rabbanim.html');
+const SOURCE_HTML = path.join(PROJECT_ROOT, 'print', 'document.html');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'dist');
-const OUTPUT_PDF = path.join(OUTPUT_DIR, 'beit-avraham-rabbanim.pdf');
+const OUTPUT_PDF = path.join(OUTPUT_DIR, 'beit-avraham.pdf');
 
+// Header/Footer של Puppeteer מופיעים בשולי ה-@page,
+// כך שהם מופיעים בכל עמוד מלבד עמוד השער (שמוגדר ב-CSS עם margin: 0).
 const HEADER_TEMPLATE = `
-  <div style="font-size:8pt;width:100%;text-align:center;color:#9B7B3D;font-family:Heebo,sans-serif;padding:0 15mm;">
+  <div style="font-size:8pt;width:100%;text-align:center;color:#9B7B3D;font-family:Heebo,sans-serif;padding:0 18mm;">
     בית אברהם · בית אחד לשלושה דורות
   </div>
 `;
 
 const FOOTER_TEMPLATE = `
-  <div style="font-size:8pt;width:100%;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;padding:0 15mm;">
+  <div style="font-size:8pt;width:100%;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;padding:0 18mm;">
     עמוד <span class="pageNumber"></span> מתוך <span class="totalPages"></span>
   </div>
 `;
@@ -61,7 +63,6 @@ async function generatePDF() {
       displayHeaderFooter: true,
       headerTemplate: HEADER_TEMPLATE,
       footerTemplate: FOOTER_TEMPLATE,
-      margin: { top: '15mm', right: '0mm', bottom: '15mm', left: '0mm' },
     });
 
     const stats = fs.statSync(OUTPUT_PDF);
