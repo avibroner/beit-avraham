@@ -333,11 +333,15 @@ p:last-child { margin-bottom: 0; }
 }
 .story-conclusion {
   font-family: 'Frank Ruhl Libre', serif;
-  font-size: 1.45rem;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 700;
   font-style: italic;
   color: #9B7B3D;
-  margin-top: 2rem !important;
+  margin-top: 3rem !important;
+  text-align: center;
+  line-height: 1.3;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(155, 123, 61, 0.25);
 }
 
 @media (max-width: 800px) {
@@ -1478,6 +1482,75 @@ p:last-child { margin-bottom: 0; }
   font-style: italic;
   margin-bottom: 1.5rem;
   color: #2A1F18;
+}
+
+/* =============================================================
+   INLINE LINKS — make all body-text links visible
+   ============================================================= */
+.story-text p a,
+.lead-para a,
+.about-moment p a,
+.lede a,
+.section-lede a,
+.model-list li a,
+.tab-intro p a,
+.faq-content a,
+.team-status a {
+  color: #9B7B3D;
+  border-bottom: 1px solid #9B7B3D;
+  transition: color .2s ease, border-color .2s ease;
+}
+.story-text p a:hover,
+.lead-para a:hover,
+.about-moment p a:hover,
+.lede a:hover,
+.section-lede a:hover,
+.model-list li a:hover,
+.tab-intro p a:hover,
+.faq-content a:hover,
+.team-status a:hover {
+  color: #856626;
+  border-bottom-color: #856626;
+}
+
+/* =============================================================
+   CROSS-LINK PLACEMENTS — spacing & dark-bg variants
+   ============================================================= */
+.aerial-caption .link-arrow.aerial-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: #C9A55F;
+}
+.aerial-caption .link-arrow.aerial-link:hover {
+  color: #FAF7F0;
+  border-bottom-color: #FAF7F0;
+}
+
+.model-spotlight-cta {
+  text-align: center;
+  margin-top: 2rem !important;
+}
+.model-spotlight-cta .link-arrow {
+  color: #C9A55F;
+}
+.model-spotlight-cta .link-arrow:hover {
+  color: #FAF7F0;
+  border-bottom-color: #FAF7F0;
+}
+
+.cta-secondary-link {
+  text-align: center;
+  margin-top: 1.75rem !important;
+}
+
+.faq-category-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+.sources-cta-links {
+  margin-top: 1.75rem !important;
+  font-size: 1.02rem;
 }
 
 /* =============================================================
