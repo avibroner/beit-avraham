@@ -13,9 +13,13 @@ const SOURCE_HTML = path.join(PROJECT_ROOT, 'print', 'document.html');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'dist');
 const OUTPUT_PDF = path.join(OUTPUT_DIR, 'beit-avraham.pdf');
 
-// Header/Footer הוסרו: רוצים רקע קרם מלא מקצה לקצה בכל עמוד,
-// וזה מצריך @page margin: 0 ב-CSS — מה שלא משאיר מקום ל-header/footer
-// של Puppeteer. אם נצטרך מספרי עמודים בעתיד, אפשר להוסיף דרך CSS @page counter.
+// פוטר עם מספור עמודים, רקע קרם כדי להישאר רציף עם שאר העמוד.
+// ה-@page :first ב-CSS דואג שעמוד השער יישאר ללא פוטר ו-full-bleed.
+const FOOTER_TEMPLATE = `
+  <div style="font-size:8pt;width:100%;height:12mm;line-height:12mm;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;background:#FAF7F0;margin:0;">
+    עמוד <span class="pageNumber"></span> מתוך <span class="totalPages"></span>
+  </div>
+`;
 
 async function generatePDF() {
   if (!fs.existsSync(SOURCE_HTML)) {
@@ -50,8 +54,9 @@ async function generatePDF() {
       format: 'A4',
       printBackground: true,
       preferCSSPageSize: true,
-      displayHeaderFooter: false,
-      margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' },
+      displayHeaderFooter: true,
+      headerTemplate: '<div></div>',
+      footerTemplate: FOOTER_TEMPLATE,
     });
 
     const stats = fs.statSync(OUTPUT_PDF);
