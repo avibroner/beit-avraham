@@ -102,7 +102,7 @@
 
   const TXT = {
     creating:  { he: 'יוצר לינק…',                                              en: 'Creating link…' },
-    copied:    { he: 'הלינק הועתק ✨ שתפו עם מי שזה ידבר אליו',                en: 'Link copied ✨ share it with someone it might speak to' },
+    copied:    { he: 'הלינק הועתק ✨ שתפו עם מי שזה ידבר אליו',                en: 'Project link copied ✨ share it with someone it might speak to' },
     yourLink:  { he: 'הלינק שלכם: ',                                            en: 'Your link: ' },
     error:     { he: 'משהו השתבש. נסו שוב או שלחו ל-avi@futureflow.co.il', en: 'Something went wrong. Please try again or email avi@futureflow.co.il' }
   };
