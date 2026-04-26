@@ -13,10 +13,16 @@ const SOURCE_HTML = path.join(PROJECT_ROOT, 'print', 'document.html');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'dist');
 const OUTPUT_PDF = path.join(OUTPUT_DIR, 'beit-avraham.pdf');
 
-// פוטר עם מספור עמודים, רקע קרם כדי להישאר רציף עם שאר העמוד.
-// ה-@page :first ב-CSS דואג שעמוד השער יישאר ללא פוטר ו-full-bleed.
+// Header/Footer של Puppeteer מופיעים בשולי ה-@page,
+// כך שהם מופיעים בכל עמוד מלבד עמוד השער (שמוגדר ב-CSS עם margin: 0).
+const HEADER_TEMPLATE = `
+  <div style="font-size:8pt;width:100%;text-align:center;color:#9B7B3D;font-family:Heebo,sans-serif;padding:0 18mm;">
+    בית אברהם · בית אחד לשלושה דורות
+  </div>
+`;
+
 const FOOTER_TEMPLATE = `
-  <div style="font-size:8pt;width:100%;height:12mm;line-height:12mm;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;background:#FAF7F0;margin:0;">
+  <div style="font-size:8pt;width:100%;text-align:center;color:#6B5A4A;font-family:Heebo,sans-serif;padding:0 18mm;">
     עמוד <span class="pageNumber"></span> מתוך <span class="totalPages"></span>
   </div>
 `;
@@ -55,7 +61,7 @@ async function generatePDF() {
       printBackground: true,
       preferCSSPageSize: true,
       displayHeaderFooter: true,
-      headerTemplate: '<div></div>',
+      headerTemplate: HEADER_TEMPLATE,
       footerTemplate: FOOTER_TEMPLATE,
     });
 

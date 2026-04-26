@@ -55,9 +55,24 @@
 
     try {
       // sendBeacon doesn't support custom headers → use fetch with keepalive
-      fetch(url, { method: 'POST', headers, body: payload, keepalive: true }).catch(() => {});
-    } catch (_) {
+      fetch(url, { method: 'POST', headers, body: payload, keepalive: true })
+        .then(function (res) {
+          if (!res.ok) {
+            // Surface server-side rejections (RLS, permissions, schema) so they don't
+            // disappear silently — past incident: 401 on every ?r= visit went unnoticed.
+            res.text().then(function (body) {
+              console.error('[bv-tracking] insert failed', res.status, body);
+            }).catch(function () {
+              console.error('[bv-tracking] insert failed', res.status);
+            });
+          }
+        })
+        .catch(function (err) {
+          console.error('[bv-tracking] network error', err);
+        });
+    } catch (e) {
       // Tracking must never break the site
+      console.error('[bv-tracking] threw', e);
     }
   }
 })();
